@@ -26,3 +26,7 @@ class Portada(models.Model):
     nombre = models.CharField(max_length=100)
     imagen = models.ImageField(upload_to="media", height_field=None, width_field=None, max_length=None)
     seleccion = models.BooleanField(default=False)
+    orden = models.IntegerField(default=1)
+    
+    def __str__(self):
+        return self.nombre

@@ -9,7 +9,7 @@ class TamanosListAPIView(ListAPIView):
     serializer_class = TamanoSerializer
     
     def get_queryset(self):   
-        return Tamano.objects.all()
+        return Tamano.objects.all().order_by('precio_base')
 
 class PedidoCreateAPIView(CreateAPIView):
     serializer_class = PedidoSerializer

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView
-from .serializers import QuesoSerializer, MasaSerializer, TipoIngredienteSerializer, IngredienteSerializer, OtroProductoSerializer
-from .models import Queso, Masa, TipoIngrediente, Ingrediente, OtroProducto
+from .serializers import QuesoSerializer, MasaSerializer, TipoIngredienteSerializer, IngredienteSerializer, OtroProductoSerializer, MenuTradicionalSerializer
+from .models import Queso, Masa, TipoIngrediente, Ingrediente, OtroProducto, MenuTradicional
 # Create your views here.
 
 class QuesosListAPIView(ListAPIView):
@@ -33,5 +33,11 @@ class OtroProductoListAPIView(ListAPIView):
     
     def get_queryset(self):
         return OtroProducto.objects.filter(disponible=True)
+    
+class MenuTradicionalListAPIView(ListAPIView):
+    serializer_class = MenuTradicionalSerializer
+    
+    def get_queryset(self):
+        return MenuTradicional.objects.filter(disponible=True)
     
 

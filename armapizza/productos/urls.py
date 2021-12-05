@@ -12,5 +12,6 @@ urlpatterns = [
     path('api/tiposingredientes/list',views.TipoIngredienteListAPIView.as_view(),name="tiposingredientesapi"),
     path('api/ingredientes/list',views.IngredienteListAPIView.as_view(),name="ingredientesapi"),
     path('api/otrosproductos/list',views.OtroProductoListAPIView.as_view(),name="otrosproductosapi"),
+    path('api/menutradicional/list',views.MenuTradicionalListAPIView.as_view(),name="menutradicionalapi"),
 
 ]
