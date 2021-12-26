@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Pedido, Tamano, Pizza, IngredientesPizza, OtrosPedido, PizzaTradicional
 # Register your models here.
 class TamanoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'descripcion', 'factorial')
+    list_display = ('nombre', 'descripcion', 'factorial', 'precio_base')
 
 class PedidoAdmin(admin.ModelAdmin):
     list_display = ('usuario', 'direccion', 'valor_total', 'celular', 'email' )

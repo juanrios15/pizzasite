@@ -17,7 +17,8 @@ INSTALLED_APPS = [
     'pedidos',
     'productos',
     
-    'rest_framework'
+    'rest_framework',
+    'django_filters'
     
 ]
 
@@ -49,6 +50,10 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
 
 WSGI_APPLICATION = 'armapizza.wsgi.application'
 

@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView
+from django_filters.rest_framework import DjangoFilterBackend
+
+
 from .serializers import QuesoSerializer, MasaSerializer, TipoIngredienteSerializer, IngredienteSerializer, OtroProductoSerializer, MenuTradicionalSerializer
 from .models import Queso, Masa, TipoIngrediente, Ingrediente, OtroProducto, MenuTradicional
 # Create your views here.
@@ -24,9 +27,20 @@ class TipoIngredienteListAPIView(ListAPIView):
     
 class IngredienteListAPIView(ListAPIView):
     serializer_class = IngredienteSerializer
-    
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = {
+        'tipo': ('exact',),
+    }
+
     def get_queryset(self):
-        return Ingrediente.objects.filter(disponible=True)
+        tipos = self.request.query_params.get('tipos', [])
+        if len(tipos)>0:
+            lista_tipos = tipos.split(",")
+            lista_tipos = [int(x) for x in lista_tipos]
+            print(lista_tipos)
+            return Ingrediente.objects.filter(disponible=True, tipo__id__in=lista_tipos)
+        else:    
+            return Ingrediente.objects.filter(disponible=True)
     
 class OtroProductoListAPIView(ListAPIView):
     serializer_class = OtroProductoSerializer
@@ -38,6 +52,6 @@ class MenuTradicionalListAPIView(ListAPIView):
     serializer_class = MenuTradicionalSerializer
     
     def get_queryset(self):
-        return MenuTradicional.objects.filter(disponible=True)
+        return MenuTradicional.objects.filter(disponible=True).order_by('precio')
     
 

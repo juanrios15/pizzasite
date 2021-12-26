@@ -5,10 +5,11 @@ from productos.models import Masa, Queso, Ingrediente, OtroProducto, MenuTradici
 
 class Pedido(models.Model):
     
-    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
-    direccion = models.CharField(max_length=250)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    nombre_usuario = models.CharField(max_length=50, blank=True, null=True)
+    direccion = models.CharField(max_length=250, blank=True, null=True)
     valor_total = models.IntegerField()
-    email = models.CharField(max_length=80)
+    email = models.CharField(max_length=80, blank=True, null=True)
     celular = models.CharField(max_length=40)
     
     def __str__(self):
@@ -51,6 +52,7 @@ class OtrosPedido(models.Model):
 class PizzaTradicional(models.Model):
     pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
     opcion = models.ForeignKey(MenuTradicional, on_delete=models.CASCADE)
+    primera_mitad = models.BooleanField(default=True)
     
     class Meta:
         verbose_name_plural = "Pizzas Tradicionales"
